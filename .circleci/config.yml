@@ -1,21 +1,28 @@
 version: 2.1
+executors:
+  ssh-executor:
+    docker:
+      - image: circleci/ssh:latest
+    environment:
+      ORACLE_SERVER_IP: 132.145.159.252 
+      SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+
 jobs:
   ssh-into-server:
-    machine:
-      image: oraclelinux:8
+    executor: ssh-executor
     steps:
       - setup_remote_docker:
           version: 20.10.7
-          docker_layer_caching: true
       - run:
           name: SSH into Oracle Linux Server
           command: |
             echo "$SSH_PRIVATE_KEY" 
             ssh -o StrictHostKeyChecking=no opc@132.145.159.252 \<< EOF
               # Run the JMeter test
-             sudo su -
-            sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
+               sudo su -
+               sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
             EOF
+
 workflows:
   build-and-test:
     jobs:
