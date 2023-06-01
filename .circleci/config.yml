@@ -28,8 +28,7 @@ jobs:
       - run:
           name: SSH into Ubuntu 20 Server
           command: |
-            ssh opc@132.145.159.252\<< EOF
+            ssh user@your-server-ip \<< EOF
               # Run the shell script on the server
-              sudo su -
-              sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
+              sh /path/to/your-script.sh
             EOF
