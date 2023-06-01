@@ -26,7 +26,7 @@ jobs:
             - "your-ssh-key-fingerprint"
 
       - run:
-          name: SSH to client Server
+          name: SSH into Ubuntu 20 Server
           command: |
             ssh opc@132.145.159.252\<< EOF
               # Run the shell script on the server
