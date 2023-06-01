@@ -16,8 +16,8 @@ jobs:
       - run:
           name: Run shell script
           command: 
-            ssh opc@132.145.159.252 
-            ls -lrt
+            ssh opc@132.145.159.252 "yes"
+            
 
 workflows:
   version: 2
