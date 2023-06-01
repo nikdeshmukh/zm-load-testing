@@ -5,6 +5,7 @@ executors:
       - image: circleci/python:3.9
 
 workflows:
+  version: 2
   build-and-test:
     jobs:
       - ssh-into-server:
@@ -22,12 +23,13 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "your-ssh-key-fingerprint"
+            - "SHA256:ag9R5yddl5QD50T/w7gM+GlREUYs1bMEcQX8aYr0o7g"
 
       - run:
           name: SSH into Ubuntu 20 Server
           command: |
-            ssh user@your-server-ip \<< EOF
+            ssh opc@132.145.159.252 \<< EOF
               # Run the shell script on the server
-              sh /path/to/your-script.sh
+              sudo su -
+              sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
             EOF
