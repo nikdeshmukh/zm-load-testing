@@ -15,8 +15,9 @@ jobs:
       # Run shell script on remote server
       - run:
           name: Run shell script
-          command: |
-            ssh -o StrictHostKeyChecking=no opc@132.145.159.252 "sudo su - && sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing"
+          command: 
+            ssh opc@132.145.159.252 
+            ls -lrt
 
 workflows:
   version: 2
