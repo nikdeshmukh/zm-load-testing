@@ -29,7 +29,6 @@ jobs:
             apt-get install -y openssh-client
 
 
-
       - run:
           name: SSH into Jmeter Client Server
           command: |
