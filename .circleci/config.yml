@@ -23,10 +23,11 @@ jobs:
 executors:
   ssh-executor:
     docker:
-      - image: luzifer/ssh
+      - image: ubuntu:20.04
 
 workflows:
   version: 2
   build-and-test:
     jobs:
       - ssh-into-server
+
