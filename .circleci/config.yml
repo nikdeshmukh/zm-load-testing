@@ -36,7 +36,7 @@ jobs:
       - run:
           name: SSH into Ubuntu20 Server
           command: |
-            ssh -o -v StrictHostKeyChecking=no opc@132.145.159.252 \<< EOF
+            ssh opc@132.145.159.252 \<< EOF
               # Run the shell script on the server
               sudo su -
               sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
