@@ -31,13 +31,13 @@ jobs:
       - run:
           name: Configure SSH
           command: |
-            echo "$SSH_KEY" | base64 -d > /home/opc/.ssh/id_rsa
+            echo "$SSH_KEY" | base64 -d > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
 
       - run:
           name: SSH into Jmeter Client Server
           command: |
-            ssh -o StrictHostKeyChecking=no opc@132.145.159.252 
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252 
               # Run the shell script on the server
               sudo su -
               sh /opt/Branch/zm-load-testing/reportGen/scripts/loadtest.sh -t generic-eas -w /opt/Branch/zm-load-testing
