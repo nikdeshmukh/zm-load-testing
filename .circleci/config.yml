@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run shell script
           command: 
-            ssh -o StrictHostKeyChecking=no ubuntu@129.213.154.31 "echo 'Hello, SSH server!'"
+            ssh ubuntu@129.213.154.31 "echo 'Hello, SSH server!'"
             
 workflows:
   version: 2
