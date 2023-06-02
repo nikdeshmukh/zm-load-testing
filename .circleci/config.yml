@@ -8,7 +8,7 @@ jobs:
    
       - add_ssh_keys:
           fingerprints:
-          - "48:f6:27:2b:ce:b9:c3:fe:e6:1a:ed:f9:b7:e9:98:2a"
+          - "b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0"
       # Run shell script on remote server
       - run:
           name: Run shell script
