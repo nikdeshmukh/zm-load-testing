@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run shell script
           command: 
-            ssh ubuntu@129.213.154.31 "sudo su -"
+            ssh -o ConnectTimeout=60 ubuntu@129.213.154.31 "sudo su -"
             
 workflows:
   version: 2
