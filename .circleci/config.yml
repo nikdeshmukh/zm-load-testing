@@ -5,7 +5,10 @@ jobs:
       - image: circleci/openjdk:11-jdk
 
     steps:
-      - checkout
+   
+      - add_ssh_keys:
+          fingerprints:
+          - "48:f6:27:2b:ce:b9:c3:fe:e6:1a:ed:f9:b7:e9:98:2a"
       # Run shell script on remote server
       - run:
           name: Run shell script
