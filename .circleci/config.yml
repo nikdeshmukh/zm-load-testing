@@ -8,6 +8,13 @@ jobs:
       - add_ssh_keys:
           fingerprints:
           - "b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0"
+
+      - run:
+          name: Install OpenSSH client
+          command: |
+            apt-get update
+            apt-get install -y openssh-client
+
       # Run shell script on remote server
       - run:
           name: Run shell script
