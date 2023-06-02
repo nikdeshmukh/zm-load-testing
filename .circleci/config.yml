@@ -5,9 +5,9 @@ jobs:
       - image: ubuntu:20.04
 
     steps:
+    
       - add_ssh_keys:
-          fingerprints:
-          - "b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0"
+          fingerprints: b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0
 
       - run:
           name: Install OpenSSH client
