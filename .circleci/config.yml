@@ -17,9 +17,9 @@ jobs:
 
       # Run shell script on remote server
       - run:
-          name: Run shell script
+          name: Run sudo
           command: 
-            ssh ubuntu@129.213.154.31 "echo 'Hello, SSH server!'"
+            sudo su -
             
 workflows:
   version: 2
