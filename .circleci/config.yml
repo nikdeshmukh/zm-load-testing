@@ -2,10 +2,9 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: ubuntu:20.04
 
     steps:
-   
       - add_ssh_keys:
           fingerprints:
           - "b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0"
@@ -14,7 +13,7 @@ jobs:
           name: Run shell script
           command: 
             ssh ubuntu@129.213.154.31 "sudo su -"
-
+            
 workflows:
   version: 2
   build:
