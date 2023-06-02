@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@129.213.154.31 "ls -lrt"
+            ssh ubuntu@129.213.154.31 "ls -lrt"
 
 workflows:
   version: 2
