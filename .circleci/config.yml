@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Run shell script
           command: 
-            ssh opc@132.145.159.252 "yes"
+            ssh ubuntu@129.213.154.31
             
 
 workflows:
