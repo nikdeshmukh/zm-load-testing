@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run shell script
           command: 
-            ssh -o ConnectTimeout=60 ubuntu@129.213.154.31 "sudo su -"
+            ssh -o StrictHostKeyChecking=no root@129.213.154.31 "echo 'Hello, SSH server!'"
             
 workflows:
   version: 2
