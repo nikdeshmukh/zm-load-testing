@@ -24,10 +24,17 @@ jobs:
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
             "cd /home/opc/Branch/zm-load-testing && sh reportGen/scripts/loadtest_3.sh -t generic-zsoap -w /home/opc/Branch/zm-load-testing"
 
+      - run:
+          name: Create results folder
+          command: 
+            mkdir -p /tmp/results
+            cp generic-zsoap-*.csv && cp generic-zsoap-*.log /tmp/results
+            cp generic-zsoap.out /tmp/results
 
       - store_artifacts:
           path: /home/opc/Branch/zm-load-testing/result
           destination: test-results
+
 
 workflows:
   version: 2
