@@ -22,14 +22,14 @@ jobs:
           name: Run JMeter test on remote server
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
-            "cd /home/opc/Branch/zm-load-testing && sh reportGen/scripts/loadtest_3.sh -t generic-zsoap -w /home/opc/Branch/zm-load-testing"
+            "cd /home/opc/Branch/zm-load-testing && ant generic-zsoap"
 
       - run:
           name: Create results folder
           command: 
             mkdir -p /tmp/results
-            cp generic-zsoap-*.csv && cp generic-zsoap-*.log /tmp/results
-            cp generic-zsoap.out /tmp/results
+            cp -r /home/opc/Branch/zm-load-testing/logs/generic-zsoap-* /tmp/results
+            cp /home/opc/Branch/zm-load-testing/generic-zsoap.out /tmp/results
 
       - store_artifacts:
           path: /home/opc/Branch/zm-load-testing/result
