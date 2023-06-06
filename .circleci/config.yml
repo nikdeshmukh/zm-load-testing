@@ -17,6 +17,13 @@ jobs:
           fingerprints:
             - "18:3d:67:c0:96:a6:b9:46:0e:3d:27:16:e9:93:81:ff"
 
+      # Create the results directory
+      - run:
+          name: Create Results Directory
+          command: 
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+            mkdir -p /tmp/result
+
       # Connect to remote server and run JMeter test
       - run:
           name: Run JMeter test on remote server
@@ -24,24 +31,19 @@ jobs:
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
             "cd /opt/apache-jmeter-3.3/bin; sh jmeter.sh -n -Juser.classpath=/home/opc/zm-load-testing/src/build/jar/zjmeter.jar -t /home/opc/zm-load-testing/tests/generic/zsoap/zsoap.jmx -q /home/opc/zm-load-testing/config/env.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/load_basic.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/profiles/basic.prop -l /tmp/result/result.csv -e -o /tmp/result -jmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml -q /home/opc/zm-load-testing/config/extras.txt"
  
-    # Create the results directory
-      - run:
-          name: Create Results Directory
-          command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252
-            mkdir -p /tmp/results
+   
           
 
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test Artifacts
           command: |
-            scp -o StrictHostKeyChecking=no root@132.145.159.252:/tmp/result/result.csv /tmp/results
+            scp -o StrictHostKeyChecking=no root@132.145.159.252:/tmp/result/result.csv /tmp/result
            
       
       # Upload test artifacts
       - store_artifacts:
-          path: /tmp/results 
+          path: /tmp/result
           
 
 workflows:
