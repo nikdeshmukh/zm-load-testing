@@ -25,10 +25,10 @@ jobs:
             "cd /home/opc/Branch/zm-load-testing && ant generic-zsoap"
 
       - run:
-          name: Create results folder
+          name: Store results
           command: 
-            mkdir -p /tmp/results
-            cp -r /home/opc/Branch/zm-load-testing/logs/generic-zsoap-* /tmp/results
+            cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.csv /tmp/results
+            cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.log /tmp/results
             cp /home/opc/Branch/zm-load-testing/generic-zsoap.out /tmp/results
 
       - store_artifacts:
