@@ -29,18 +29,18 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
             mkdir -p /tmp/results
-            chmod 600 /tmp/results
+            mkdir -p /tmp/zmstat-charts
 
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test Artifacts
           command: |
             scp -o StrictHostKeyChecking=no root@132.145.159.252:/home/opc/zm-load-testing/logs/generic-zsoap-* /tmp/results
-            scp -r /home/opc/zm-load-testing/generic-zsoap_* /tmp/results
+            scp -r /home/opc/zm-load-testing/result/generic-zsoap_* /tmp/zmstat-charts
       
       # Upload test artifacts
       - store_artifacts:
-          path: /tmp/results
+          path: /tmp/results && /tmp/zmstat-charts
           
 
 workflows:
