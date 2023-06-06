@@ -39,7 +39,7 @@ jobs:
           name: Copy Test Artifacts
           command: |
             scp -o StrictHostKeyChecking=no root@132.145.159.252:/tmp/results/result.csv /tmp/result
-            cp -r root@132.145.159.252:/tmp/result/* /tmp/result
+            scp -o StrictHostKeyChecking=no root@132.145.159.252:/tmp/result/index.html /tmp/result
       
       # Upload test artifacts
       - store_artifacts:
