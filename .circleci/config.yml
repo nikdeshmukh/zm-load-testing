@@ -24,16 +24,23 @@ jobs:
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
             "cd /home/opc/Branch/zm-load-testing && ant generic-zsoap"
 
+      # Create the results directory
       - run:
-          name: Store results
-          command: 
+          name: Create Results Directory
+          command: mkdir -p /tmp/results
+
+      # Copy test artifacts to the results directory
+      - run:
+          name: Copy Test Artifacts
+          command: |
             cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.csv /tmp/results
             cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.log /tmp/results
             cp /home/opc/Branch/zm-load-testing/generic-zsoap.out /tmp/results
 
+      # Upload test artifacts
       - store_artifacts:
           path: /tmp/results
-          destination: results
+          destination: test-results
 
 
 workflows:
