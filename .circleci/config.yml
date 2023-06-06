@@ -31,8 +31,8 @@ jobs:
 
       # Upload test artifacts
       - store_artifacts:
-          path: /home/opc/Branch/zm-load-testing/logs
-          destination: test-results
+          path: results
+          
 
 
 workflows:
