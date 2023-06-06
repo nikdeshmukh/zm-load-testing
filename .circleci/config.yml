@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Copy Test Artifacts
           command: |
-           cp /home/opc/Branch/zm-load-testing/generic-zsoap.out /home/opc/Branch/zm-load-testing/logs
+           cp /home/opc/zm-load-testing/generic-zsoap.out /home/opc/zm-load-testing/logs
 
       # Upload test artifacts
       - store_artifacts:
