@@ -21,7 +21,10 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252 "cd /home/opc/zm-load-testing; ant generic-zsoap"
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252 
+            "cd /opt/apache-jmeter-3.3/bin"
+            "sh jmeter.sh -n -Juser.classpath=/home/opc/zm-load-testing/src/build/jar/zjmeter.jar -t /home/opc/zm-load-testing/tests/generic/zsoap/zsoap.jmx -q /home/opc/zm-load-testing/config/env.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/load_basic.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/profiles/basic.prop -l /tmp/result/result.csv -e -o /tmp/results -jmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml -q /home/opc/zm-load-testing/config/extras.txt"
+ 
 
     # Create the results directory
       - run:
@@ -35,7 +38,7 @@ jobs:
       - run:
           name: Copy Test Artifacts
           command: |
-            scp -o StrictHostKeyChecking=no root@132.145.159.252:/home/opc/zm-load-testing/logs/generic-zsoap-* /tmp/results
+            scp -o StrictHostKeyChecking=no root@132.145.159.252:/home/opc/zm-load-testing/logs/generic-zsoap-requests.csv /tmp/results
            
       
       # Upload test artifacts
