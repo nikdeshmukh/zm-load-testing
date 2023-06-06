@@ -28,17 +28,17 @@ jobs:
           name: Create Results Directory
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
-            mkdir -p results
-            chmod 600 results
+            mkdir -p /tmp/results
+            chmod 600 /tmp/results
 
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test Artifacts
           command: |
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
-            cp /home/opc/zm-load-testing/logs/generic-zsoap-requests.csv results
-            cp /home/opc/zm-load-testing/logs/generic-zsoap-*.log results
-            cp /home/opc/zm-load-testing/generic-zsoap.out results
+            cp /home/opc/zm-load-testing/logs/generic-zsoap-requests.csv /tmp/results
+            cp /home/opc/zm-load-testing/logs/generic-zsoap-*.log /tmp/results
+            cp /home/opc/zm-load-testing/generic-zsoap.out /tmp/results
       
       # Upload test artifacts
       - store_artifacts:
