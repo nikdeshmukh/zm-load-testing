@@ -27,16 +27,15 @@ jobs:
       - run:
           name: Create Results Directory
           command: 
-            mkdir -p /tmp/results
-            chmod 600 /tmp/results
+            mkdir -p results
+            chmod 600 results
 
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test Artifacts
           command: |
-            cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.csv /tmp/results
-            cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-*.log /tmp/results
-
+            cp /home/opc/zm-load-testing/logs/generic-zsoap-requests.csv results
+      
       # Upload test artifacts
       - store_artifacts:
           path: results
