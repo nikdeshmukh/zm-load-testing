@@ -24,20 +24,10 @@ jobs:
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
             "cd /home/opc/Branch/zm-load-testing && sh runtest_1.sh -u generic"
 
-      # Create the results directory
-      - run:
-          name: Create Results Directory
-          command: mkdir -p /tmp/results
-
-      # Copy test artifacts to the results directory
-      - run:
-          name: Copy Test Artifacts
-          command: |
-            cp /home/opc/Branch/zm-load-testing/logs/generic-zsoap-requests.csv /tmp/results
 
       # Upload test artifacts
       - store_artifacts:
-          path: /tmp/results
+          path: /home/opc/Branch/zm-load-testing/logs
           destination: test-results
 
 
