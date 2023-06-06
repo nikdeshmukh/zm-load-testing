@@ -15,7 +15,7 @@ jobs:
       # Set up SSH key
       - add_ssh_keys:
           fingerprints:
-            - "b8:20:1c:84:9e:98:73:4b:ef:66:9d:30:c9:01:55:e0"
+            - "8e:49:d8:7c:fc:23:6f:fa:f1:73:a0:4c:99:48:30:50"
 
       # Connect to remote server and run JMeter test
       - run:
