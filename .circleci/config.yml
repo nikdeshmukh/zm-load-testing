@@ -40,7 +40,7 @@ jobs:
       
       # Upload test artifacts
       - store_artifacts:
-          path: /tmp/results && /tmp/zmstat-charts
+          path: /tmp/results &&  /tmp/zmstat-charts
           
 
 workflows:
