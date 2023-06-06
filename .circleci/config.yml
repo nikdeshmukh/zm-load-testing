@@ -21,7 +21,16 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252 "ls -lrt"
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252 
+            "cd /home/opc/Branch/zm-load-testing && sh reportGen/scripts/loadtest_3.sh -t generic-zsoap -w /opt/Branch/zm-load-testing"
+
+      - run:
+          name: Store results 
+          command: cp /tmp/results.jtl /tmp/results
+
+      - store_artifacts:
+          path: /home/opc/Branch/zm-load-testing/result
+          destination: test-results
 
 workflows:
   version: 2
