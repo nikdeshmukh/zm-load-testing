@@ -21,9 +21,7 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252 
-            "cd /home/opc/zm-load-testing"
-            "ant generic-zsoap"
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252 "cd /home/opc/zm-load-testing; ant generic-zsoap"
 
       # Create the results directory
       - run:
