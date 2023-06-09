@@ -44,8 +44,11 @@ jobs:
       - run:
           name: Copy Test Artifacts
           command: |
-            scp -r root@132.145.159.252:/tmp/result /tmp/result
-            scp -r root@132.145.159.252:/tmp/results/generic_zsoap.csv /tmp/result
+            scp -r root@132.145.159.252:/tmp/soap /tmp/result
+            scp -r root@132.145.159.252:/tmp/imap /tmp/result
+            scp -r root@132.145.159.252:/tmp/lmtp /tmp/result
+            scp -r root@132.145.159.252:/tmp/pop /tmp/result
+            scp -r root@132.145.159.252:/tmp/results/*.csv /tmp/result
 
       # Upload test artifacts
       - store_artifacts:
