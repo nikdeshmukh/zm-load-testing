@@ -36,11 +36,10 @@ jobs:
           name: Generate CSV file from jtl file
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
-            java -version
-            /usr/local/openjdk-8/bin/java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_zsoap.jtl --generate-csv /tmp/results/generic_zsoap.csv
-            /usr/local/openjdk-8/bin/java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_imap.jtl --generate-csv /tmp/results/generic_imap.csv
-            /usr/local/openjdk-8/bin/java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_pop.jtl --generate-csv /tmp/results/generic_pop.csv
-            /usr/local/openjdk-8/bin/java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_lmtp.jtl --generate-csv /tmp/results/generic_lmtp.csv
+            /usr/bin/java java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/soap/generic_zsoap.jtl --generate-csv /tmp/results/generic_zsoap.csv
+            /usr/bin/java java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/imap/generic_imap.jtl --generate-csv /tmp/results/generic_imap.csv
+            /usr/bin/java java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/pop/generic_pop.jtl --generate-csv /tmp/results/generic_pop.csv
+            /usr/bin/java java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/lmtp/generic_lmtp.jtl --generate-csv /tmp/results/generic_lmtp.csv
   
       # Copy test artifacts to the results directory
       - run:
