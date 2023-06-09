@@ -35,7 +35,7 @@ jobs:
       - run:
           name: Generate CSV file from jtl file
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+            ssh  root@132.145.159.252
             java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_zsoap.jtl --generate-csv /tmp/results/generic_zsoap.csv
             java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_imap.jtl --generate-csv /tmp/results/generic_imap.csv
             java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_pop.jtl --generate-csv /tmp/results/generic_pop.csv
