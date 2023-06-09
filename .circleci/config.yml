@@ -36,7 +36,7 @@ jobs:
           name: Generate CSV file from jtl file
           command: 
              ssh -o StrictHostKeyChecking=no root@132.145.159.252 
-             ""cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
+             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
 
       # Copy test artifacts to the results directory
       - run:
