@@ -29,14 +29,17 @@ jobs:
           name: Run JMeter test on remote server
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
-            "cd /opt/apache-jmeter-3.3/bin; sh jmeter.sh -n -Juser.classpath=/home/opc/zm-load-testing/src/build/jar/zjmeter.jar -t /home/opc/zm-load-testing/tests/generic/zsoap/zsoap.jmx -q /home/opc/zm-load-testing/config/env.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/load_basic.prop -q /home/opc/zm-load-testing/tests/generic/zsoap/profiles/basic.prop -l /tmp/results/generic_zsoap.jtl -e -o /tmp/result -jmeter.save.saveservice.thread_counts=true -Djmeter.save.saveservice.output_format=xml -q /home/opc/zm-load-testing/config/extras.txt;"
-  
+            "cd /opt/apache-jmeter-3.3/bin; sh regression_load_test.sh"
+       
    #  Generate CSV file from jtl input
       - run:
           name: Generate CSV file from jtl input
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
             "java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_zsoap.jtl --generate-csv /tmp/results/generic_zsoap.csv"
+            "java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_imap.jtl --generate-csv /tmp/results/generic_imap.csv"
+            "java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_pop.jtl --generate-csv /tmp/results/generic_pop.csv"
+            "java -jar /opt/apache-jmeter-5.4.3/lib/cmdrunner-2.2.jar --tool Reporter --plugin-type SynthesisReport --input-jtl /tmp/results/generic_lmtp.jtl --generate-csv /tmp/results/generic_lmtp.csv"
   
       # Copy test artifacts to the results directory
       - run:
