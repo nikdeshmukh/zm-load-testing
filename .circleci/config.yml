@@ -42,8 +42,9 @@ jobs:
       - run:
           name: Copy Test Artifacts
           command: |
-            scp root@132.145.159.252:/tmp/results/*.csv /tmp/result
-            scp -r root@132.145.159.252:/tmp/result /tmp/result
+            scp -r root@132.145.159.252:/tmp/result /tmp/results
+            scp -r root@132.145.159.252:/tmp/results /tmp/result
+            
 
       # Upload test artifacts
       - store_artifacts:
