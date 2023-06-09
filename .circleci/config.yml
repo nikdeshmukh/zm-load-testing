@@ -37,7 +37,7 @@ jobs:
           command: 
              ssh -o StrictHostKeyChecking=no root@132.145.159.252 
              "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
-             
+
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test Artifacts
@@ -46,7 +46,7 @@ jobs:
             scp -r root@132.145.159.252:/tmp/imap /tmp/result
             scp -r root@132.145.159.252:/tmp/lmtp /tmp/result
             scp -r root@132.145.159.252:/tmp/pop /tmp/result
-            cp root@132.145.159.252:/tmp/results/*.csv /tmp/result
+            scp root@132.145.159.252:/tmp/results/*.csv /tmp/result
 
       # Upload test artifacts
       - store_artifacts:
