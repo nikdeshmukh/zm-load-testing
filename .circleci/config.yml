@@ -23,7 +23,7 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
             mkdir -p /tmp/result
-            
+          
 
       # Connect to remote server and run JMeter test
       - run:
