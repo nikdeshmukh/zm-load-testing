@@ -23,6 +23,10 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
             mkdir -p /tmp/result
+            mkdir -p /tmp/soap/soap_html_report
+            mkdir -p /tmp/soap/imap_html_report
+            mkdir -p /tmp/soap/lmtp_html_report
+            mkdir -p /tmp/soap/pop_html_report
 
       # Connect to remote server and run JMeter test
       - run:
@@ -49,10 +53,18 @@ jobs:
       # Upload test artifacts
       - store_artifacts:
           path: /tmp/result
-                /tmp/soap/soap_html_report
-                /tmp/soap/imap_html_report
-                /tmp/soap/lmtp_html_report
-                /tmp/soap/pop_html_report
+              
+      - store_artifacts:
+          path: /tmp/soap/soap_html_report
+
+      - store_artifacts:
+          path: /tmp/imap/imap_html_report
+
+      - store_artifacts:
+          path:  /tmp/lmtp/lmtp_html_report
+
+      - store_artifacts:
+          path: /tmp/pop/pop_html_report
           
 workflows:
   version: 2
