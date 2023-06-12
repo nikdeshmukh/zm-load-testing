@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Copy soap Test Artifacts
           command: |
-            scp -r root@132.145.159.252:/tmp/soap/soap_html_report /tmp/result/soap_html_report
+            scp -r root@132.145.159.252:/tmp/result /tmp/result
            
       - store_artifacts:
           path: /tmp/result
