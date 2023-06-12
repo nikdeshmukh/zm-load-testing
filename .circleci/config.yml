@@ -23,10 +23,7 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
             mkdir -p /tmp/result
-            mkdir -p /tmp/soap/soap_html_report
-            mkdir -p /tmp/soap/imap_html_report
-            mkdir -p /tmp/soap/lmtp_html_report
-            mkdir -p /tmp/soap/pop_html_report
+            
 
       # Connect to remote server and run JMeter test
       - run:
@@ -46,13 +43,19 @@ jobs:
       - run:
           name: Copy Test files to Artifacts
           command: |
-            
+           
             scp -r root@132.145.159.252:/tmp/results /tmp/result
           
 
       # Upload test artifacts
       - store_artifacts:
           path: /tmp/result
+
+      - run:
+          name: Create HTML Results Directory
+          command: 
+            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+             mkdir -p /tmp/soap/soap_html_report
 
       - run:
           name: Copy soap Test Artifacts
@@ -62,32 +65,7 @@ jobs:
       - store_artifacts:
           path: /tmp/soap/soap_html_report
 
-      - run:
-          name: Copy imap Test Artifacts
-          command: |
-            scp -r root@132.145.159.252:/tmp/soap/imap_html_report /tmp/imap/soap_html_report         
-
-      - store_artifacts:
-          path: /tmp/imap/imap_html_report
-
-      - run:
-          name: Copy lmtp Test Artifacts
-          command: |
-            scp -r root@132.145.159.252:/tmp/soap/lmtp_html_report /tmp/lmtp/lmtp_html_report         
-
-
-      - store_artifacts:
-          path:  /tmp/lmtp/lmtp_html_report
-
-      - run:
-          name: Copy pop Test Artifacts
-          command: |
-            scp -r root@132.145.159.252:/tmp/pop/lmtp_html_report /tmp/pop/lmtp_html_report 
-
-
-      - store_artifacts:
-          path: /tmp/pop/pop_html_report
-          
+  
 
 workflows:
   version: 2
