@@ -43,7 +43,7 @@ jobs:
           name: Copy Test Artifacts
           command: |
             scp -r root@132.145.159.252:/tmp/result /tmp/results
-            scp -r root@132.145.159.252:/tmp/results /tmp/result
+         #   scp -r root@132.145.159.252:/tmp/results /tmp/result
             
 
       # Upload test artifacts
