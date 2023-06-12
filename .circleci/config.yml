@@ -66,6 +66,7 @@ jobs:
       - store_artifacts:
           path: /tmp/pop/pop_html_report
           
+          
 workflows:
   version: 2
   build-and-deploy:
