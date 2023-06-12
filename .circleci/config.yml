@@ -47,10 +47,6 @@ jobs:
             scp -r root@132.145.159.252:/tmp/results /tmp/result
           
 
-      # Upload test artifacts
-      - store_artifacts:
-          path: /tmp/result
-
       - run:
           name: Create HTML Results Directory
           command: 
@@ -65,7 +61,9 @@ jobs:
       - store_artifacts:
           path: /tmp/soap/soap_html_report
 
-  
+        # Upload test artifacts
+      - store_artifacts:
+          path: /tmp/result
 
 workflows:
   version: 2
