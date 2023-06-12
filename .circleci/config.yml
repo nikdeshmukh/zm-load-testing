@@ -22,7 +22,7 @@ jobs:
           name: Create Results Directory
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
-            mkdir -p /tmp/result/Test_files
+            mkdir -p /tmp/result
             
 
       # Connect to remote server and run JMeter test
@@ -45,7 +45,7 @@ jobs:
           command: |
            
             scp -r root@132.145.159.252:/tmp/results /tmp/result
-        
+          
 
       - run:
           name: Create HTML Results Directory
@@ -56,14 +56,12 @@ jobs:
       - run:
           name: Copy soap Test Artifacts
           command: |
-            scp -r root@132.145.159.252:/tmp/result/soap_html_report /tmp/result/soap_html_report
+            scp -r root@132.145.159.252:/tmp/soap/soap_html_report /tmp/result/soap_html_report
            
       - store_artifacts:
-          path: /tmp/result/soap_html_report
+          path: /tmp/result
 
-        # Upload test artifacts
-      - store_artifacts:
-          path: /tmp/result/Test_files
+  
 
 workflows:
   version: 2
