@@ -42,13 +42,17 @@ jobs:
       - run:
           name: Copy Test Artifacts
           command: |
-            scp -r root@132.145.159.252:/tmp/result /tmp/results
+            
             scp -r root@132.145.159.252:/tmp/results /tmp/result
             
 
       # Upload test artifacts
       - store_artifacts:
           path: /tmp/result
+                /tmp/soap/soap_html_report
+                /tmp/soap/imap_html_report
+                /tmp/soap/lmtp_html_report
+                /tmp/soap/pop_html_report
           
 workflows:
   version: 2
