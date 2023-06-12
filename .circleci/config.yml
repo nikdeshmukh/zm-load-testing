@@ -48,7 +48,7 @@ jobs:
           command: |
             
             scp -r root@132.145.159.252:/tmp/results /tmp/result
-            
+          
 
       # Upload test artifacts
       - store_artifacts:
@@ -66,7 +66,7 @@ jobs:
       - store_artifacts:
           path: /tmp/pop/pop_html_report
           
-          
+
 workflows:
   version: 2
   build-and-deploy:
