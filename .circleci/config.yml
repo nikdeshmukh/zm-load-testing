@@ -44,7 +44,7 @@ jobs:
 
       # Copy test artifacts to the results directory
       - run:
-          name: Copy Test Artifacts
+          name: Copy Test files to Artifacts
           command: |
             
             scp -r root@132.145.159.252:/tmp/results /tmp/result
@@ -53,15 +53,37 @@ jobs:
       # Upload test artifacts
       - store_artifacts:
           path: /tmp/result
-              
+
+      - run:
+          name: Copy soap Test Artifacts
+          command: |
+            scp -r root@132.145.159.252:/tmp/soap/soap_html_report /tmp/soap/soap_html_report
+           
       - store_artifacts:
           path: /tmp/soap/soap_html_report
+
+      - run:
+          name: Copy imap Test Artifacts
+          command: |
+            scp -r root@132.145.159.252:/tmp/soap/imap_html_report /tmp/imap/soap_html_report         
 
       - store_artifacts:
           path: /tmp/imap/imap_html_report
 
+      - run:
+          name: Copy lmtp Test Artifacts
+          command: |
+            scp -r root@132.145.159.252:/tmp/soap/lmtp_html_report /tmp/lmtp/lmtp_html_report         
+
+
       - store_artifacts:
           path:  /tmp/lmtp/lmtp_html_report
+
+      - run:
+          name: Copy pop Test Artifacts
+          command: |
+            scp -r root@132.145.159.252:/tmp/pop/lmtp_html_report /tmp/pop/lmtp_html_report 
+
 
       - store_artifacts:
           path: /tmp/pop/pop_html_report
