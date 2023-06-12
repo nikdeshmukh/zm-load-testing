@@ -6,6 +6,7 @@ jobs:
 
     steps:
       - checkout
+        
 
       # Install SSH client
       - run:
@@ -30,8 +31,8 @@ jobs:
           name: Run JMeter test on remote server
           command: 
             ssh -o StrictHostKeyChecking=no root@132.145.159.252
-          no_output_timeout: 120m
             "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
+          no_output_timeout: 120m
        
    #  Generate CSV file from jtl input
       - run:
