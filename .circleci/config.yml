@@ -45,7 +45,7 @@ jobs:
           command: |
            
             scp -r root@132.145.159.252:/tmp/results /tmp/result
-          
+        
 
       - run:
           name: Create HTML Results Directory
