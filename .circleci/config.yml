@@ -40,12 +40,33 @@ jobs:
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
              "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
 
-     #  Run response time comparison across builds and create report
+     #  Run response time comparison across builds and create comparison report for soap
       - run:
           name: 
           command: 
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; python3 calc_resp_time.py"
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_zsoap.py"
+
+    #  Run response time comparison across builds and create comparison report for imap
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_imap.py"
+
+     #  Run response time comparison across builds and create comparison report for pop
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_pop.py"
+
+    #  Run response time comparison across builds and create comparison report for lmtp
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time_lmtp.py"
 
       # Copy test artifacts to the results directory
       - run:
