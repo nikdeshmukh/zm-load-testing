@@ -62,7 +62,7 @@ jobs:
       - store_artifacts:
           path: /tmp/result
 
-  
+
 
 workflows:
   version: 2
