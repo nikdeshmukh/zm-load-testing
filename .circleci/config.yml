@@ -40,6 +40,13 @@ jobs:
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
              "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
 
+     #  Run response time comparison across builds and create report
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 calc_resp_time.py"
+
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test files to Artifacts
@@ -53,6 +60,8 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
              mkdir -p /tmp/result/html_report
+
+             
 
       - run:
           name: Copy soap Test Artifacts
