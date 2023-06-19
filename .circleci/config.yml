@@ -22,14 +22,14 @@ jobs:
       - run:
           name: Create Results Directory
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
             mkdir -p /tmp/result
           
       # Connect to remote server and run JMeter test
       - run:
           name: Run JMeter test on remote server
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
             "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
           no_output_timeout: 120m
        
@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Generate CSV file from jtl file
           command: 
-             ssh -o StrictHostKeyChecking=no root@132.145.159.252 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
              "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
 
       # Copy test artifacts to the results directory
@@ -45,19 +45,19 @@ jobs:
           name: Copy Test files to Artifacts
           command: |
            
-            scp -r root@132.145.159.252:/tmp/results /tmp/result
+            scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
           
 
       - run:
           name: Create HTML Results Directory
           command: 
-            ssh -o StrictHostKeyChecking=no root@132.145.159.252
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
              mkdir -p /tmp/result/html_report
 
       - run:
           name: Copy soap Test Artifacts
           command: |
-            scp -r root@132.145.159.252:/tmp/result /tmp/result
+            scp -r ${USER}@${SERVER}:/tmp/result /tmp/result
            
       - store_artifacts:
           path: /tmp/result
