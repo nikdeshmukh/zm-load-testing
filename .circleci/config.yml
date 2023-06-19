@@ -38,7 +38,7 @@ jobs:
           name: Generate CSV file from jtl file
           command: 
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
-             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter.sh"
+             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
 
      #  Run response time comparison across builds and create comparison report for soap
       - run:
