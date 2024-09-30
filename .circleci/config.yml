@@ -16,7 +16,7 @@ jobs:
       # Set up SSH key
       - add_ssh_keys:
           fingerprints:
-            - "18:3d:67:c0:96:a6:b9:46:0e:3d:27:16:e9:93:81:ff"
+            - "SHA256:Afc6ZY8tntqqdMKQRPjUfe1blywjlQaaRZv9xN95eW8"
 
       # Create the results directory
       - run:
