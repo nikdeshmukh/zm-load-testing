@@ -49,7 +49,7 @@ jobs:
 
     #  Run response time comparison across builds and create comparison report for imap
       - run:
-          name: 
+          name:
           command: 
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
              "cd /home/opc/zm-load-testing; python3 calc_resp_time_imap.py"
