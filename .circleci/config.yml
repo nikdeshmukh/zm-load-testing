@@ -16,13 +16,13 @@ jobs:
       # Set up SSH key
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:C9AYOKwKzuBuQQywuzcR9FTwKJv0eVYT0Yk9jDxy5Mc"
+            - "SHA256:uwnefeAAwNlWCEztdnpR6mfMrizxObKmZYISpVqAPDs"
 
       # Create the results directory
       - run:
           name: Create Results Directory
           command: 
-            ssh -o StrictHostKeyChecking=no opc@141.148.192.36
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
             mkdir -p /tmp/result
           
       # Connect to remote server and run JMeter test
