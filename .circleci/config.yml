@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Create Results Directory
           command: 
-            ssh -o StrictHostKeyChecking=no root@141.148.192.36
+            ssh -o StrictHostKeyChecking=no opc@141.148.192.36
             mkdir -p /tmp/result
           
       # Connect to remote server and run JMeter test
