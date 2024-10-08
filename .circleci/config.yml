@@ -72,7 +72,6 @@ jobs:
       - run:
           name: Copy Test files to Artifacts
           command: |
-           
             scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
           
 
