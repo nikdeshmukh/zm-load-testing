@@ -73,14 +73,12 @@ jobs:
           command: |
             scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
           
-
       - run:
           name: Create HTML Results Directory
           command: 
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
              mkdir -p /tmp/result/html_report
   
-
       - run:
           name: Copy soap Test Artifacts
           command: |
