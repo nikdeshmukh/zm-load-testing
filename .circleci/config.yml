@@ -7,7 +7,6 @@ jobs:
     steps:
       - checkout
         
-
       # Install SSH client
       - run:
           name: Install SSH client
@@ -80,8 +79,7 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
              mkdir -p /tmp/result/html_report
-
-             
+  
 
       - run:
           name: Copy soap Test Artifacts
@@ -90,7 +88,6 @@ jobs:
            
       - store_artifacts:
           path: /tmp/result
-
 
 
 workflows:
