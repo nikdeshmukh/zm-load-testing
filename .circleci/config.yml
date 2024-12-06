@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-    parallelism: 4
     steps:
       - checkout
         
