@@ -1,10 +1,6 @@
 runner:
   max_run_time: "5h"  # Set max run time to 5 hours
 
-executors:
-  runner-executor:
-    machine: true  # This specifies that the job will run on a self-hosted runner
-    resource_class: large 
 
 jobs:
   build:
