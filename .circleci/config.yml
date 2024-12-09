@@ -4,6 +4,7 @@ runner:
 executors:
   runner-executor:
     machine: true  # This specifies that the job will run on a self-hosted runner
+    resource_class: large 
 
 jobs:
   build:
