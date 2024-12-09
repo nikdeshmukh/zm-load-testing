@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-    resource_class: xlarge
+    resource_class: large
       
     steps:
       - checkout
@@ -31,8 +31,8 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
             "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
-          no_output_timeout: 5h
-          timeout: 5h
+          no_output_timeout: 3h
+          timeout: 3h
        
    #  Generate CSV file from jtl input
       - run:
