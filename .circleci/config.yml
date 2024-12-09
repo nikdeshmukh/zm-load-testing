@@ -1,69 +1,98 @@
-runner:
-  max_run_time: "5h"  # Set max run time to 5 hours
-
-executors:
-  runner-executor:
-    machine: true  # This specifies that the job will run on a self-hosted runner
-    resource_class: small  # Optional: Choose the resource class if needed
-
+version: 2.1
 jobs:
   build:
-    executor: runner-executor
+    docker:
+      - image: circleci/openjdk:8-jdk
+    resource_class: xlarge
+      
     steps:
       - checkout
+        
+      # Install SSH client
       - run:
           name: Install SSH client
           command: sudo apt-get update && sudo apt-get install -y openssh-client
+
+      # Set up SSH key
       - add_ssh_keys:
           fingerprints:
             - "SHA256:Afc6ZY8tntqqdMKQRPjUfe1blywjlQaaRZv9xN95eW8"
+
+      # Create the results directory
       - run:
           name: Create Results Directory
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} mkdir -p /tmp/result
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+            mkdir -p /tmp/result
+          
+      # Connect to remote server and run JMeter test
       - run:
           name: Run JMeter test on remote server
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
-          no_output_timeout: 180m
-          timeout: 180m
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+            "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
+          no_output_timeout: 5h
+          timeout: 5h
+       
+   #  Generate CSV file from jtl input
       - run:
           name: Generate CSV file from jtl file
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+
+     #  Run response time comparison across builds and create comparison report for soap
       - run:
-          name: Run response time comparison for soap
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_zsoap.py"
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 compare_resp_time_zsoap.py"
+
+    #  Run response time comparison across builds and create comparison report for imap
       - run:
-          name: Run response time comparison for imap
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_imap.py"
+          name:
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 compare_resp_time_imap.py"
+
+     #  Run response time comparison across builds and create comparison report for pop
       - run:
-          name: Run response time comparison for pop
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_pop.py"
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 compare_resp_time_pop.py"
+
+    #  Run response time comparison across builds and create comparison report for lmtp
       - run:
-          name: Run response time comparison for lmtp
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_lmtp.py"
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 compare_resp_time_lmtp.py"
+
+      # Copy test artifacts to the results directory
       - run:
           name: Copy Test files to Artifacts
           command: |
             scp -r ${USER}@${SERVER}:/tmp/results /tmp/result
+          
       - run:
           name: Create HTML Results Directory
-          command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} mkdir -p /tmp/result/html_report
+          command: 
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
+             mkdir -p /tmp/result/html_report
+  
       - run:
           name: Copy soap Test Artifacts
           command: |
             scp -r ${USER}@${SERVER}:/tmp/result /tmp/result
+           
       - store_artifacts:
           path: /tmp/result
+
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - build
+
