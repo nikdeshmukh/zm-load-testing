@@ -30,8 +30,8 @@ jobs:
           command: 
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
             "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
-          no_output_timeout: 3h
-          timeout: 3h
+          no_output_timeout: 2h
+          timeout: 2h
        
    #  Generate CSV file from jtl input
       - run:
