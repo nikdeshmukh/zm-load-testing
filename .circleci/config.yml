@@ -141,7 +141,7 @@ workflows:
       - perf_test_baseline:
           requires:
             - perf_test_baseline_approval
-            
+
       # Step 3: Approval to run the test on benchmark build
       - perf_test_benchmark_approval:
           type: approval  # This is an approval step
