@@ -30,14 +30,13 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
           no_output_timeout: 1h
-          timeout: 1h
 
       - run:
           name: Generate CSV file from jtl file
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
-            "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B1.sh"
-
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B1.sh"
+          no_output_timeout: 1h
+          
  # Runs performance tests on current build
   perf_test_benchmark:
     docker:
