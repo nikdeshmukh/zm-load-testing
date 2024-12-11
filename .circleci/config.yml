@@ -1,8 +1,7 @@
 version: 2.1
-
+# Runs performance test on baseline build
 jobs:
-  # Runs performance test on baseline build
-  perf_test_baseline:
+  perf_test_baseline:  
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
@@ -35,8 +34,7 @@ jobs:
           name: Generate CSV file from jtl file
           command: |
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B1.sh"
-          no_output_timeout: 1h
-          
+
  # Runs performance tests on current build
   perf_test_benchmark:
     docker:
@@ -65,14 +63,12 @@ jobs:
           name: Run JMeter test on remote server
           command: |
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
-          no_output_timeout: 2h
-          timeout: 2h
+          no_output_timeout: 1h
 
       - run:
           name: Generate CSV file from jtl file
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER}
-            "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
 
   # Run response time comparison across builds and create comparison report for SOAP
       - run:
