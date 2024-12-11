@@ -131,22 +131,25 @@ jobs:
 workflows:
   version: 2
   perf_test_workflow:
-    jobs:
-      - perf_test_baseline:
-          filters:
-            branches:
-              only: circleci-editor/504/circleci-project-setup  # You can adjust the filter as needed
+   jobs:
+      # Step 1: Approval to run the test on baseline build
       - perf_test_baseline_approval:
-          type: approval  # Approval step for beseline test
+          type: approval  # This is an approval step
+          description: "Approve to run the test on the baseline build"
+      
+      # Step 2: Run the baseline test after approval
+      - perf_test_baseline:
+          requires:
+            - perf_test_baseline_approval
+
+      # Step 3: Approval to run the test on benchmark build
+      - perf_test_benchmark_approval:
+          type: approval  # This is an approval step
+          description: "Approve to run the test on the benchmark build"
           requires:
             - perf_test_baseline
+
+      # Step 4: Run the benchmark test after approval
       - perf_test_benchmark:
-          filters:
-            branches:
-              only: circleci-editor/504/circleci-project-setup  # You can adjust the filter as needed
           requires:
-            - perf_test_baseline_approval  # Make sure benchmark runs after approval_1
-      - perf_test_benchmark_approval:
-          type: approval  # Approval step for benchmark test
-          requires:
-            - perf_test_benchmark
+            - perf_test_benchmark_approval
