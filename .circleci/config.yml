@@ -68,6 +68,13 @@ jobs:
              ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
              "cd /home/opc/zm-load-testing; python3 compare_resp_time_lmtp.py"
 
+    #  Run response time comparison across builds and create comparison report for ActiveSync
+      - run:
+          name: 
+          command: 
+             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} 
+             "cd /home/opc/zm-load-testing; python3 compare_resp_time_eas.py"
+
       # Copy test artifacts to the results directory
       - run:
           name: Copy Test files to Artifacts
@@ -81,7 +88,7 @@ jobs:
              mkdir -p /tmp/result/html_report
   
       - run:
-          name: Copy soap Test Artifacts
+          name: Copy Test Artifacts
           command: |
             scp -r ${USER}@${SERVER}:/tmp/result /tmp/result
            
