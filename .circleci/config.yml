@@ -35,7 +35,7 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B1.sh"
 
- # Runs performance tests on current build
+ # Runs performance test on current/benchmark build
   perf_test_benchmark:
     docker:
       - image: circleci/openjdk:8-jdk
