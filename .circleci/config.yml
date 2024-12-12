@@ -27,13 +27,13 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh regression_load_test_run.sh"
           no_output_timeout: 1h
 
       - run:
           name: Generate CSV file from jtl file
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B1.sh"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh jtl_to_csv_converter_B1.sh"
 
  # Runs performance test on current/benchmark build
   perf_test_benchmark:
@@ -62,43 +62,43 @@ jobs:
       - run:
           name: Run JMeter test on remote server
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh regression_load_test_run.sh"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh regression_load_test_run.sh"
           no_output_timeout: 1h
 
       - run:
           name: Generate CSV file from jtl file
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; sh jtl_to_csv_converter_B2.sh"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; sh jtl_to_csv_converter_B2.sh"
 
   # Run response time comparison across builds and create comparison report for SOAP
       - run:
           name: Run response time comparison for SOAP
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_zsoap.py"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_zsoap.py"
 
       # Run response time comparison across builds and create comparison report for IMAP
       - run:
           name: Run response time comparison for IMAP
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_imap.py"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_imap.py"
 
       # Run response time comparison across builds and create comparison report for POP
       - run:
           name: Run response time comparison for POP
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_pop.py"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_pop.py"
 
       # Run response time comparison across builds and create comparison report for LMTP
       - run:
           name: Run response time comparison for LMTP
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_lmtp.py"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_lmtp.py"
 
       # Run response time comparison across builds and create comparison report for ActiveSync
       - run:
           name: Run response time comparison for ActiveSync
           command: |
-            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd /home/opc/zm-load-testing; python3 compare_resp_time_eas.py"
+            ssh -o StrictHostKeyChecking=no ${USER}@${SERVER} "cd ${ZM_LOAD_TEST_DIR}; python3 compare_resp_time_eas.py"
 
       # Copy test artifacts to the results directory
       - run:
